@@ -1,0 +1,10 @@
+pre.syntaxhighlighter-container {
+	padding: 0 0.5em;
+}
+pre.syntaxhighlighter-container div.syntaxhighlighter {
+	overflow: hidden !important;
+}
+
+@media screen and (max-width: 800px) {
+	/* TODO un style mobile, mais j'ai la flemme là tout de suite */
+}
