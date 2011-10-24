@@ -13,7 +13,7 @@
 	<meta name="author" content="Nicolas Chambrier">
 
 	<link rel="stylesheet" href="deckjs/core/deck.core.css">
-	<!-- link rel="stylesheet" href="deckjs/themes/style/web-2.0.css" -->
+	<link rel="stylesheet" href="deckjs/themes/style/web-2.0.css">
 	<!-- link rel="stylesheet" href="deckjs/themes/transition/fade.css" -->
 	<link rel="stylesheet" href="deckjs/themes/transition/horizontal-slide.css">
 
@@ -34,8 +34,108 @@
 
 <body class="deck-container">
 
-<section class="slide" id="title-slide">
-	<h1>Getting Started with deck.js</h1>
+<!-- Caché sur les titres -->
+
+<footer>
+	<strong class="agenda">N. Chambrier - LyonJS 25 Oct 2011</strong>
+	<strong class="talk">Node.JS &amp; WebSockets</strong>
+	<p class="deck-status"><span class="deck-status-current"></span>/<span class="deck-status-total"></span></p>
+</footer>
+
+<!-- Global headline -->
+
+<section class="slide" id="slide-title-main">
+	<h1>Node.JS &amp; WebSockets<br>Introduction, performances, clustering...</h1>
+</section>
+
+<section class="slide" id="slide-title1">
+	<h1>Node.JS</h1>
+</section>
+
+<section class="slide" id="nodejs">
+	<h2>Node.JS</h2>
+	<p><strong>Node.JS est-il un cancer ?</strong></p>
+	<ul>
+		<li class="slide">Un exécutable: <code>node</code></li>
+		<li class="slide">Un moteur <strong>performant</strong>: <code>v8</code></li>
+		<li class="slide">Un cœur minimal: <strong>KISS</strong></li>
+		<li class="slide">Une API <strong>filesystem</strong> &amp; <strong>network</strong>: <code>HTTP/1.1</code></li>
+		<li class="slide">Mais surtout une API <strong>asynchrone</strong> et un <code>single-thread event loop</code></li>
+	</ul>
+	<blockquote class="slide">
+		<p>En tous cas c'est plus facile qu'Erlang, et vachement plus puissant que PHP</p>
+	</blockquote>
+	<a href="http://nodejs.org">nodejs.org</a>
+</section>
+
+<section class="slide" id="install-nodejs">
+	<h2>Node.JS - Installation</h2>
+	<pre class="brush:bash">
+git clone --depth 1 git://github.com/joyent/node.git
+# or git clone git://github.com/joyent/node.git if you want
+# to checkout a stable tag
+cd node
+git checkout v0.4.12 # optional. Note: master is unstable
+./configure
+make -j2 # -j sets the number of jobs to run
+[sudo] make install</pre>
+</section>
+
+<section class="slide" id="http11">
+	<h2>Node.JS - HTTP/1.1</h2>
+	<p><strong>Les navigateurs supportent tous une partie de HTTP/1.1</strong></p>
+	<p><strong>Idem pour les serveurs</strong></p>
+	<ul>
+		<li class="slide">Un nouveau verbe: <code>UPGRADE</code></li>
+		<li class="slide">Le cache: <code>ETag</code>, <code>If-Modified-Since</code></li>
+		<li class="slide">Réseau: <strong style="color:red">Connexions persistantes, Pipelining</strong>, Chunk Transfer Encoding...</li>
+		<li class="slide">Et plein d'autres trucs sur <a href="http://www8.org/w8-papers/5c-protocols/key/key.html">www8.org</a></li>
+	</ul>
+	<p class="slide"><strong>Node.JS supporte <strong style="color:red">tout</strong> le protocole.</strong></p>
+</section>
+
+<section class="slide" id="nodejs-modules">
+	<h2>Node.JS - Modules</h2>
+	<p><strong>Don't Repeat Yourself</strong></p>
+	<p><strong>Don't Reinvent the Wheel</strong></p>
+	<p><strong>Learn 2 Search, mother fucker!</strong></p>
+	<ul>
+		<li class="slide">Une implémentation de <a href="wiki.commonjs.org/wiki/Modules/1.1.1">CommonJS</a>: <code>require()</code></li>
+		<li class="slide">Un dépôt de modules: <code><a href="http://npmjs.org">NPM</a></code></li>
+	</ul>
+	<blockquote cite="http://nodejs.org" class="slide">
+		<p>There's a module for that</p>
+	</blockquote>
+</section>
+
+<section class="slide" id="nodejs-api-async1">
+	<h2>Node.JS - API asynchrone</h2>
+	<pre class="brush:javascript">
+var fs = require('fs');
+
+fs.readFile('fichier1', function (err, content) {
+	if (err) {
+		// Cas d'erreur
+	} else {
+		// "content" est une instance de "Buffer"
+		console.log(content.toString());
+	}
+}
+
+console.log("pas la peine d'attendre que le FS ait répondu avant de m'afficher :)");</pre>
+</section>
+
+<section class="slide" id="nodejs-api-async2">
+	<h2>Node.JS - API asynchrone</h2>
+	<pre class="brush:javascript">
+var fs = require('fs');
+
+fs.readFile('fichier1', function (err, content) { /* ... */ });
+fs.readFile('fichier2', function (err, content) { /* ... */ });
+fs.readFile('fichier3', function (err, content) { /* ... */ });
+
+console.log("lecture simultanée de 3 fichiers");
+console.log("impossible de prédire l'ordre de réponse");</pre>
 </section>
 
 <section class="slide" id="how-to-overview">
@@ -154,14 +254,10 @@
 	<p>If you want to learn about making your own themes, extending deck.js, and more, check out the&nbsp;<a href="../docs/">documentation</a>.</p>
 </section>
 
+<!-- Extensions -->
+
 <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
 <a href="#" class="deck-next-link" title="Next">&#8594;</a>
-
-<p class="deck-status">
-	<span class="deck-status-current"></span>
-	/
-	<span class="deck-status-total"></span>
-</p>
 
 <form action="." method="get" class="goto-form">
 	<label for="goto-slide">Go to slide:</label>
@@ -170,6 +266,8 @@
 </form>
 
 <a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+
+<!-- JS -->
 
 <script src="deckjs/jquery-1.6.4.min.js"></script>
 <script src="deckjs/core/deck.core.js"></script>
@@ -181,6 +279,7 @@
 <script src="deckjs/extensions/hash/deck.scale.js"></script>
 <script type="text/javascript" src="sh/scripts/shCore.js"></script>
 <script type="text/javascript" src="sh/scripts/shBrushXml.js"></script>
+<script type="text/javascript" src="sh/scripts/shBrushBash.js"></script>
 <script type="text/javascript" src="sh/scripts/shBrushJScript.js"></script>
 <script type="text/javascript" src="socket.io/socket.io.js"></script>
 <script src="main.js"></script>

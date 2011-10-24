@@ -1,10 +1,69 @@
-pre.syntaxhighlighter-container {
+.deck-container {
+	font-size: 26pt;
+}
+.deck-container h1 {
+	font-size: 64pt;
+}
+.deck-container h2 {
+	font-size: 42pt;
+}
+.deck-container h3 {
+	font-size: 34pt;
+}
+
+.deck-container pre.syntaxhighlighter-container {
 	padding: 0 0.5em;
 }
-pre.syntaxhighlighter-container div.syntaxhighlighter {
+.deck-container pre.syntaxhighlighter-container div.syntaxhighlighter {
 	overflow: hidden !important;
 }
 
 @media screen and (max-width: 800px) {
 	/* TODO un style mobile, mais j'ai la flemme là tout de suite */
+}
+
+.deck-container.on-slide-0 footer,
+.deck-container.on-slide-1 footer {
+	display: none;
+}
+.deck-container {
+	position: relative;
+}
+.deck-container footer {
+	display: block;
+	width: 100%;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	overflow: hidden;
+	background: #fff;
+	z-index: 4;
+	border-top: 1px solid #666;
+	background: #eee;
+	padding: 5px 0 10px 0;
+	font-size: 14px;
+}
+.deck-container footer .agenda {
+	color: #999;
+	font-weight: normal;
+	display: block;
+	position: absolute;
+	left: 20px;
+	top: 10px;
+}
+.deck-container footer .talk {
+	font-size: 1.1em;
+	color: #777;
+	display: block;
+	text-align: center;
+}
+.deck-container footer .deck-status {
+	position: absolute;
+	right: 20px;
+	top: 10px;
+}
+
+.deck-container .goto-form {
+	bottom: auto;
+	top: 0;
 }

@@ -15,7 +15,7 @@ $(function() {
 	SyntaxHighlighter.all();
 
 	// Remote control
-	if (io) {
+	if ('undefined' != typeof io) {
 		(function (socket) {
 			var remoting = false, warned = false;
 			// Enable remote control
