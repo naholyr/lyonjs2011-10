@@ -1,0 +1,2 @@
+kill -9 $(cat app.pid)
+rm -f app.pid

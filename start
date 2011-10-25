@@ -1,0 +1,2 @@
+nohup node app.js > nohup.out &
+echo $! > app.pid

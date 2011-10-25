@@ -17,7 +17,7 @@ $(function() {
 	// Remote control
 	if ('undefined' != typeof io) {
 		(function (socket) {
-			var remoting = false, warned = false;
+			var remoting = true, warned = false;
 			// Enable remote control
 			socket.on('deck', function () {
 				remoting = true;
@@ -30,6 +30,11 @@ $(function() {
 					warned = true;
 					alert('Les contrôles locaux sont actifs. Néanmoins, laisse-toi guider, ce sera plus sympa pour toi :)');
 				}
+			});
+			$(document).bind('deck.init', function () {
+				//remoting = true;
+				//$.deck('go', 35);
+				remoting = false;
 			});
 		})(io.connect())
 	}

@@ -1,20 +1,35 @@
 .deck-container {
-	font-size: 26pt;
+	font-size: 20pt;
 }
 .deck-container h1 {
-	font-size: 64pt;
+	font-size: 50pt;
 }
 .deck-container h2 {
-	font-size: 42pt;
+	font-size: 35pt;
 }
 .deck-container h3 {
-	font-size: 34pt;
+	font-size: 25pt;
 }
 
-.deck-container pre.syntaxhighlighter-container {
+.deck-container .images-stack {
+	position: relative;
+}
+.deck-container .images-stack .slide.deck-previous,
+.deck-container .images-stack .slide.deck-before {
+	display: none;
+}
+
+.deck-container .bgwhite {
+	-webkit-box-shadow: 0px 0px 20px 20px rgba(255, 255, 255, 1);
+	-moz-box-shadow: 0px 0px 20px 20px rgba(255, 255, 255, 1);
+	-o-box-shadow: 0px 0px 20px 20px rgba(255, 255, 255, 1);
+	box-shadow: 0px 0px 20px 20px rgba(255, 255, 255, 1);
+}
+
+.deck-container .syntaxhighlighter-container {
 	padding: 0 0.5em;
 }
-.deck-container pre.syntaxhighlighter-container div.syntaxhighlighter {
+.deck-container .syntaxhighlighter-container .syntaxhighlighter {
 	overflow: hidden !important;
 }
 
@@ -23,7 +38,13 @@
 }
 
 .deck-container.on-slide-0 footer,
-.deck-container.on-slide-1 footer {
+.deck-container.on-slide-1 footer,
+.deck-container.on-slide-20 footer,
+.deck-container.on-slide-25 footer,
+.deck-container.on-slide-36 footer,
+.deck-container.on-slide-46 footer,
+.deck-container.on-slide-76 footer,
+.deck-container.on-slide-77 footer {
 	display: none;
 }
 .deck-container {
@@ -40,7 +61,7 @@
 	z-index: 4;
 	border-top: 1px solid #666;
 	background: #eee;
-	padding: 5px 0 10px 0;
+	padding: 3px 0 5px 0;
 	font-size: 14px;
 }
 .deck-container footer .agenda {

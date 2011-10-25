@@ -15,7 +15,6 @@
 	<link rel="stylesheet" href="deckjs/core/deck.core.css">
 	<link rel="stylesheet" href="deckjs/themes/style/web-2.0.css">
 	<!-- link rel="stylesheet" href="deckjs/themes/transition/fade.css" -->
-	<link rel="stylesheet" href="deckjs/themes/transition/horizontal-slide.css">
 
 	<link rel="stylesheet" href="deckjs/extensions/goto/deck.goto.css">
 	<link rel="stylesheet" href="deckjs/extensions/menu/deck.menu.css">
@@ -44,31 +43,33 @@
 
 <!-- Global headline -->
 
-<section class="slide" id="slide-title-main">
-	<h1>Node.JS &amp; WebSockets<br>Introduction, performances, clustering...</h1>
+<section class="slide">
+	<h1>Node.JS<br>WebSockets<br><small>présentation, performances, clustering...</small></h1>
 </section>
 
-<section class="slide" id="slide-title1">
+<section class="slide">
 	<h1>Node.JS</h1>
 </section>
 
-<section class="slide" id="nodejs">
-	<h2>Node.JS</h2>
-	<p><strong>Node.JS est-il un cancer ?</strong></p>
+<section class="slide">
+	<h2>Node.JS - <a href="http://nodejs.org">nodejs.org</a></h2>
 	<ul>
-		<li class="slide">Un exécutable: <code>node</code></li>
-		<li class="slide">Un moteur <strong>performant</strong>: <code>v8</code></li>
-		<li class="slide">Un cœur minimal: <strong>KISS</strong></li>
-		<li class="slide">Une API <strong>filesystem</strong> &amp; <strong>network</strong>: <code>HTTP/1.1</code></li>
-		<li class="slide">Mais surtout une API <strong>asynchrone</strong> et un <code>single-thread event loop</code></li>
+		<li>Un exécutable: <code>node</code></li>
+		<li>Un moteur <strong>performant</strong>: <code>v8</code></li>
+		<li>Un cœur minimal: <strong>KISS</strong></li>
+		<li>Une API <strong>filesystem</strong> &amp; <strong>network</strong>: <code>HTTP/1.1</code></li>
+		<li>Mais surtout une API <strong>asynchrone</strong> et un <code>single-thread event loop</code></li>
 	</ul>
-	<blockquote class="slide">
-		<p>En tous cas c'est plus facile qu'Erlang, et vachement plus puissant que PHP</p>
-	</blockquote>
-	<a href="http://nodejs.org">nodejs.org</a>
 </section>
 
-<section class="slide" id="install-nodejs">
+<section class="slide">
+	<h2>Node.JS - <a href="http://nodejs.org">nodejs.org</a></h2>
+	<blockquote>
+		<p>En tous cas c'est plus facile qu'Erlang, et vachement plus puissant que PHP</p>
+	</blockquote>
+</section>
+
+<section class="slide">
 	<h2>Node.JS - Installation</h2>
 	<pre class="brush:bash">
 git clone --depth 1 git://github.com/joyent/node.git
@@ -81,34 +82,40 @@ make -j2 # -j sets the number of jobs to run
 [sudo] make install</pre>
 </section>
 
-<section class="slide" id="http11">
+<section class="slide">
 	<h2>Node.JS - HTTP/1.1</h2>
-	<p><strong>Les navigateurs supportent tous une partie de HTTP/1.1</strong></p>
-	<p><strong>Idem pour les serveurs</strong></p>
-	<ul>
-		<li class="slide">Un nouveau verbe: <code>UPGRADE</code></li>
-		<li class="slide">Le cache: <code>ETag</code>, <code>If-Modified-Since</code></li>
-		<li class="slide">Réseau: <strong style="color:red">Connexions persistantes, Pipelining</strong>, Chunk Transfer Encoding...</li>
-		<li class="slide">Et plein d'autres trucs sur <a href="http://www8.org/w8-papers/5c-protocols/key/key.html">www8.org</a></li>
+	<p><strong>Les navigateurs supportent tous partiellement HTTP/1.1. Idem pour les serveurs.</strong></p>
+	<ul class="slide">
+		<li>Un nouveau verbe: <code>UPGRADE</code></li>
+		<li>Le cache: <code>ETag</code>, <code>If-Modified-Since</code></li>
+		<li>Réseau: <strong style="color:red">Connexions persistantes, Pipelining</strong>, Chunk Transfer Encoding...</li>
+		<li>Et plein d'autres trucs sur <a href="http://www8.org/w8-papers/5c-protocols/key/key.html">www8.org</a></li>
 	</ul>
 	<p class="slide"><strong>Node.JS supporte <strong style="color:red">tout</strong> le protocole.</strong></p>
 </section>
 
-<section class="slide" id="nodejs-modules">
+<section class="slide">
 	<h2>Node.JS - Modules</h2>
 	<p><strong>Don't Repeat Yourself</strong></p>
 	<p><strong>Don't Reinvent the Wheel</strong></p>
-	<p><strong>Learn 2 Search, mother fucker!</strong></p>
-	<ul>
-		<li class="slide">Une implémentation de <a href="wiki.commonjs.org/wiki/Modules/1.1.1">CommonJS</a>: <code>require()</code></li>
-		<li class="slide">Un dépôt de modules: <code><a href="http://npmjs.org">NPM</a></code></li>
-	</ul>
-	<blockquote cite="http://nodejs.org" class="slide">
-		<p>There's a module for that</p>
-	</blockquote>
+	<div class="images-stack">
+		<div class="slide">
+			<p><strong>Learn 2 Search, mother fucker!</strong></p>
+			<ul>
+				<li>Une implémentation de <a href="wiki.commonjs.org/wiki/Modules/1.1.1">CommonJS</a>: <code>require()</code></li>
+				<li>Un dépôt de modules: <code><a href="http://npmjs.org">NPM</a></code></li>
+			</ul>
+		</div>
+		<div class="slide">
+			<ul>
+				<li><strong>Un dépôt de modules: <code><a href="http://npmjs.org">NPM</a></code></strong></li>
+			</ul>
+			<blockquote cite="http://nodejs.org"><p>There's a module for that</p></blockquote>
+		</div>
+	</div>
 </section>
 
-<section class="slide" id="nodejs-api-async1">
+<section class="slide">
 	<h2>Node.JS - API asynchrone</h2>
 	<pre class="brush:javascript">
 var fs = require('fs');
@@ -117,141 +124,473 @@ fs.readFile('fichier1', function (err, content) {
 	if (err) {
 		// Cas d'erreur
 	} else {
-		// "content" est une instance de "Buffer"
+		// "content" instance de "Buffer"
 		console.log(content.toString());
 	}
 }
 
-console.log("pas la peine d'attendre que le FS ait répondu avant de m'afficher :)");</pre>
+console.log("afficher avant réponse I/O");</pre>
 </section>
 
-<section class="slide" id="nodejs-api-async2">
+<section class="slide">
 	<h2>Node.JS - API asynchrone</h2>
 	<pre class="brush:javascript">
 var fs = require('fs');
 
-fs.readFile('fichier1', function (err, content) { /* ... */ });
-fs.readFile('fichier2', function (err, content) { /* ... */ });
-fs.readFile('fichier3', function (err, content) { /* ... */ });
+fs.readFile('fichier1', /* ... */ );
+fs.readFile('fichier2', /* ... */ );
+fs.readFile('fichier3', /* ... */ );
 
-console.log("lecture simultanée de 3 fichiers");
-console.log("impossible de prédire l'ordre de réponse");</pre>
+console.log("lecture de 3 fichiers");
+console.log("impossible de prédire")
+console.log("l'ordre de réponse");</pre>
 </section>
 
-<section class="slide" id="how-to-overview">
-	<h2>How to Make a Deck</h2>
-	<ol>
-		<li>
-			<h3>Write Slides</h3>
-			<p>Slide content is simple&nbsp;HTML.</p>
-		</li>
-		<li>
-			<h3>Choose Themes</h3>
-			<p>One for slide styles and one for deck&nbsp;transitions.</p>
-		</li>
-		<li>
-			<h3>Include Extensions</h3>
-			<p>Add extra functionality to your deck, or leave it stripped&nbsp;down.</p>
-		</li>
-	</ol>
+<section class="slide">
+	<h2>Node.JS - API asynchrone</h2>
+	<h3>Single-Thread Event Loop: l'analogie du roi</h3>
+	<p>Le roi ordonne à ses messagers, qui reviennent dès qu'ils le peuvent, et le roi traite les réponses au fur et à mesure, <strong>une à la fois</strong>.</p>
 </section>
 
-<section class="slide" id="markup">
-	<h2>The Markup</h2>
-	<p>Slides are just HTML elements with a class of <code>slide</code>.</p>
-	<pre class="brush: html">&lt;section class=&quot;slide&quot;&gt;
-   &lt;h2&gt;How to Make a Deck&lt;/h2&gt;
-   &lt;ol&gt;
-      &lt;li&gt;
-         &lt;h3&gt;Write Slides&lt;/h3&gt;
-         &lt;p&gt;Slide content is simple HTML.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-         &lt;h3&gt;Choose Themes&lt;/h3&gt;
-         &lt;p&gt;One for slide styles and one for deck transitions.&lt;/p&gt;
-      &lt;/li&gt;
-      &hellip;
-   &lt;/ol&gt;
-&lt;/section&gt;</pre>
+<section class="slide">
+	<h3>Single-Thread Event Loop: l'analogie du roi</h3>
+	<img src="images/evloop1.png">
 </section>
 
-<section class="slide" id="themes">
-	<h2>Style Themes</h2>
-	<p>Customizes the colors, typography, and layout of slide&nbsp;content.</p>
-	<pre class="brush: html">&lt;link rel=&quot;stylesheet&quot; href=&quot;/path/to/css/style-theme.css&quot;&gt;</pre>
-	<h2>Transition Themes</h2>
-	<p>Defines transitions between slides using CSS3 transitions.  Less capable browsers fall back to cutaways. But <strong>you</strong> aren&rsquo;t using <em>those</em> browsers to give your presentations, are&nbsp;you&hellip;</p>
-	<pre class="brush:html">&lt;link rel=&quot;stylesheet&quot; href=&quot;/path/to/css/transition-theme.css&quot;&gt;</pre>
+<section class="slide">
+	<h3>Single-Thread Event Loop: l'analogie du roi</h3>
+	<img src="images/evloop2.png">
 </section>
 
-<section class="slide" id="extensions">
-	<h2>Extensions</h2>
-	<p>Core gives you basic slide functionality with left and right arrow navigation, but you may want more. Here are the ones included in this&nbsp;deck:</p>
+<section class="slide">
+	<h3>Single-Thread Event Loop: l'analogie du roi</h3>
+	<img src="images/evloop3.png">
+</section>
 
+<section class="slide">
+	<h3>Single-Thread Event Loop: l'analogie du roi</h3>
+	<img src="images/evloop4.png">
+</section>
+
+<section class="slide">
+	<h3>Single-Thread et performances</h3>
+	<p>On y reviendra plus tard...</p>
+	<div class="slide">
+		<p>Pour l'instant, place au fun!</p>
+		<img src="images/poney-arc-en-ciel.jpg" class="bgwhite">
+	</div>
+</section>
+
+<section class="slide">
+	<h1>Web Sockets</h1>
+</section>
+
+<section class="slide">
+	<h2>Web Sockets</h2>
 	<ul>
-		<li class="slide" id="extensions-goto">
-			<strong>deck.goto</strong>: Adds a shortcut key to jump to any slide number.  Hit g, type in the slide number, and hit&nbsp;enter.
-		</li>
+		<li>Connexion persistante</li>
+		<li>Communication bi-directionnelle</li>
+		<li>À travers un socket dédié</li>
+	</ul>
+</section>
 
-		<li class="slide" id="extensions-hash">
-			<strong>deck.hash</strong>: Enables internal linking within slides, deep linking to individual slides, and updates the address bar &amp; a permalink anchor with each slide&nbsp;change.
-		</li>
+<section class="slide">
+	<h2>Web Sockets</h2>
+	<img src="images/ws1.png" class="bgwhite">
+</section>
 
-		<li class="slide" id="extensions-menu">
-			<strong>deck.menu</strong>: Adds a menu view, letting you see all slides in a grid. Hit m to toggle to menu view, continue navigating your deck, and hit m to return to normal view. Touch devices can double-tap the deck to switch between&nbsp;views.
-		</li>
+<section class="slide">
+	<h2>Web Sockets</h2>
+	<img src="images/ws2.png" class="bgwhite">
+</section>
 
-		<li class="slide" id="extensions-navigation">
-			<strong>deck.navigation</strong>: Adds clickable left and right buttons for the less keyboard&nbsp;inclined.
-		</li>
+<section class="slide">
+	<h2>Web Sockets</h2>
+	<img src="images/ws3.png" class="bgwhite">
+</section>
 
-		<li class="slide" id="extensions-status">
-			<strong>deck.status</strong>: Adds a page number indicator. (current/total)
+<section class="slide">
+	<h1>Socket.IO</h1>
+	<img src="images/socketio.png" align="center">
+</section>
+
+<section class="slide">
+	<h2>Socket.IO - Les WebSockets faciles</h2>
+	<ul>
+		<li>Serveur: Module Node.JS</li>
+		<li>Client: Une librairie multi-plateforme</li>
+		<li>Support de moults modes de communications</li>
+		<li>Choix du transport en fonction du contexte</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Socket.IO - Le serveur</h2>
+	<pre class="brush:javascript">
+var app = require('http').createServer(function (req, res) {
+	/* ... */
+}).listen(8000);
+var sockets = require('socket.io').listen(app).sockets;
+// Nouveau client
+sockets.on('connection', function (client) {
+	// Évènement envoyé par le client
+	client.on('client→serveur', function (data) {
+		// Envoyer un évènement à tous les autres clients
+		client.broadcast.emit('serveur → client', 'data');
+	});
+});</pre>
+</section>
+
+<section class="slide">
+	<h2>Socket.IO - Le client</h2>
+	<p>La librairie client est intégrée dans le serveur</p>
+	<pre class="brush:html">&lt;script type="text/javascript" src="/socket.io/socket.io.js"&gt;&lt;/script&gt;</pre>
+</section>
+
+<section class="slide">
+	<h2>Socket.IO - Le client</h2>
+	<p>L'API est uniforme et cohérente</p>
+	<pre class="brush:javascript">// Connexion
+var socket = io.connect();
+// Évènement envoyé par le serveur
+socket.on('serveur → client', function (data) {
+	/* ... */
+});
+// Envoyer un évènement au serveur
+$('#button').bind('click', function () {
+	socket.emit('client → serveur', 'data');
+});</pre>
+</section>
+
+<section class="slide">
+	<h2>WebSockets - Use cases</h2>
+	<blockquote>Ce serait cool si je pouvais envoyer des données du serveur direct aux clients</blockquote>
+</section>
+
+<section class="slide">
+	<h2>WebSockets - Use cases</h2>
+	<ul>
+		<li>Messagerie instantanée</li>
+		<li>News en temps réel</li>
+		<li class="slide">Présentation contrôlée à distance ?</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Socket.IO - Use cases</h2>
+	<ul>
+		<li><strong>Présentation contrôlée à distance ?</strong></li>
+	</ul>
+	<pre class="brush:javascript">// Serveur
+client.on('next', function () {
+	sockets.emit('next');
+});
+
+// Client
+socket.on('next', function () {
+	$.deck('next');
+});</pre>
+</section>
+
+<section class="slide">
+	<h2>Socket.IO - Use cases</h2>
+	<ul>
+		<li><strong>Présentation contrôlée à distance ?</strong></li>
+	</ul>
+	<img src="images/challenge-accepted.jpg" class="bgwhite" align="center">
+</section>
+
+<section class="slide">
+	<h2>Web Sockets - Use cases</h2>
+	<ul>
+		<li><strong>Présentation contrôlée à distance</strong></li>
+	</ul>
+	<p>Vous pouvez suivre cette présentation en live</p>
+	<br><br>
+	<p align="center"><strong>sur <a href="http://naholyr.fr:1338">naholyr.fr:1338</a></strong></p>
+</section>
+
+<section class="slide">
+	<h1>Performances ?</h1>
+</section>
+
+<section class="slide">
+	<h2>Node.JS - Performances</h2>
+	<ul>
+		<li>Node.JS est <strong>rapide</strong></li>
+		<li>V8 est le moteur le plus <strong>performant</strong></li>
+		<li>Mais...</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Node.JS - Performances</h2>
+	<p>Mais Node.JS est <strong>mono-tâche</strong></p>
+	<pre class="brush:javascript">
+fs.readFile('fichier1', function (err, content) {
+	calcul_tres_long(); // 10 s
+});
+fs.readFile('fichier2', function (err, content) {
+	// j'ai fini de lire "fichier2" ...
+	// ... mais je dois attendre ...
+	// ... la fin de "calcul_tres_long()"
+	// :(
+});</pre>
+</section>
+
+<section class="slide">
+	<h2>Node.JS - Performances</h2>
+	<ul>
+		<li>Node.JS est <strong>simple</strong></li>
+		<li>Mais Node.JS manipule des concepts <strong>complexes</strong></li>
+	</ul>
+	<div class="slide">
+		<blockquote>Noob friendly ?</blockquote>
+		<p>Certains "experts" (*) voient ça d'un mauvais œil.</p>
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Node.JS - Performances</h2>
+	<blockquote><p>Node.JS is cancer</p></blockquote>
+	<img src="images/troll.jpg" align="right" width="180">
+	<img src="images/trollface.png" align="left">
+	<p><a href="http://teddziuba.com/2011/10/node-js-is-cancer.html">Ted Dziuba</a></p>
+	<p class="slide"><small>(NDLT: dans ce contexte, "expert" = "gros élitiste de mes deux")</small></p>
+</section>
+
+<section class="slide">
+	<h2>Node.JS - Performances</h2>
+	<h3>Les solutions ?</h3>
+	<ul>
+		<li><strong>Ne pas faire de gros calculs</strong> :)</li>
+		<li class="slide"><strong><em>Déléguer</em> les gros calculs</strong> (<code>fork</code>, <code>spawn</code>, un queue externe...)</li>
+		<li class="slide"><strong>Tirer parti de mon CPU 24 cœurs ?</strong> (<code>fork</code>, <code>cluster</code>)</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h1>Cluster & Load-Balancing</h1>
+</section>
+
+<section class="slide">
+	<h2>Node.JS - Performances</h2>
+	<h3>Cluster</h3>
+	<p><a href="http://learnboost.github.com/cluster/">learnboost.github.com/cluster</a></p>
+	<pre class="brush:javascript">
+var cluster = require('cluster');
+cluster(require('./app'))
+  .use(cluster.logger('logs'))
+  .use(cluster.stats())
+  .listen(3000);</pre>
+</section>
+
+<section class="slide">
+	<h2>Node.JS - Performances</h2>
+	<h3>Cluster & Load Balancing</h3>
+	<ul>
+		<li>Utiliser le module de TJ Holowaychuck</li>
+		<li>Utiliser le cluster intégré dans Node.JS version ≥ 0.5.10</li>
+	</ul>
+	<div class="images-stack">
+		<div class="slide"><pre class="brush:bash">node cluster "./app.js"</pre></div>
+		<div class="slide"><pre>Detected 2 cpus
+Worker 6790 online
+Worker 6789 online</pre></div>
+	</div>
+</section>
+
+<section class="slide">
+	<h2>Clustering - c'est pas facile</h2>
+	<ul>
+		<li>Variables d'applications (ou de modules!)</li>
+		<li>Sessions en mémoire</li>
+		<li>Tout autre type de données en mémoire, dont...</li>
+	<ul>
+	<p class="slide"><br><br><strong>Les sockets de Socket.IO :/</strong></p>
+</section>
+
+<section class="slide">
+	<h2>Clustering - c'est pas facile</h2>
+	<img src="images/websocket-cluster-fail1.png" class="bgwhite">
+</section>
+
+<section class="slide">
+	<h2>Clustering - c'est pas facile</h2>
+	<img src="images/websocket-cluster-fail2.png" class="bgwhite">
+</section>
+
+<section class="slide">
+	<h2>Clustering - c'est pas facile</h2>
+	<img src="images/websocket-cluster-fail3.png" class="bgwhite">
+</section>
+
+<section class="slide">
+	<h2>Clustering - c'est pas facile</h2>
+	<img src="images/websocket-cluster-fail4.png" class="bgwhite">
+</section>
+
+<section class="slide">
+	<h2>Clustering - la solution</h2>
+	<ul>
+		<li>Quand un serveur reçoit un évènement, il doit le diffuser à tous les autres nœuds du cluster</li>
+		<li><strong>Mettre en place un bus de messages</strong></li>
+		<li>Temps réel</li>
+		<li>Cluster-friendly</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Clustering - bus de message</h2>
+	<img src="images/websocket-cluster-fail1.png" class="bgwhite">
+</section>
+
+<section class="slide">
+	<h2>Clustering - bus de message</h2>
+	<img src="images/websocket-cluster-bus1.png" class="bgwhite">
+</section>
+
+<section class="slide">
+	<h2>Clustering - bus de message</h2>
+	<img src="images/websocket-cluster-bus2.png" class="bgwhite">
+</section>
+
+<section class="slide">
+	<h2>Clustering - bus de message</h2>
+	<img src="images/websocket-cluster-bus3.png" class="bgwhite">
+</section>
+
+<section class="slide">
+	<h2>Clustering - bus de message</h2>
+	<img src="images/websocket-cluster-bus4.png" class="bgwhite">
+</section>
+
+<section class="slide">
+	<h2>Clustering - les solutions</h2>
+	<ul>
+		<li>Mettre en place un bus de messages</li>
+		<li><strong>Profiter des solutions existantes</strong></li>
+	</ul>
+	<h3><strong>Oui mais lesquelles ?</strong></h3>
+	<p>Qui...</p>
+	<ul>
+		<li class="slide">... est performant pour la transmission de messages ?</li>
+		<li class="slide">... est nativement "cluster-friendly" ?</li>
+		<li class="slide"><strong>MQueue</strong>, <strong>Redis</strong>, entre autres</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Clustering - <a href="http://redis.io">Redis</a> est votre ami</h2>
+	<ul>
+		<li>Se "clusterise" bien nativement (sharding, réplication)</li>
+	</ul>
+	<pre class="brush:javascript">var redis = require("redis");
+var client = redis.createClient();
+</pre>
+	<ul>
+		<li><strong>Killer-feature: pub/sub!</strong></li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Redis PUB / SUB</h2>
+<pre class="brush:javascript">
+// S'inscrire à un channel
+client.subscribe("channel");
+client.on('subscribe', function (channel) {});
+
+// Recevoir un message sur ce channel
+client.on('message', function (channel, msg) {});
+
+// Envoyer un message sur ce channel
+client.publish("channel", "my message");
+</pre>
+</section>
+
+<section class="slide">
+	<h2>Clustering - Redis est votre ami</h2>
+	<ul>
+		<li>Intégration native dans la plupart des modules:
+			<ul>
+				<li>Express/Connect: sessions</li>
+				<li>Socket.IO: infos clients</li>
+			</ul>
 		</li>
 	</ul>
-
-	<p class="slide" id="extension-folders">Each extension folder in the download package contains the necessary JavaScript, CSS, and HTML&nbsp;files. For a complete list of extension modules included in deck.js, check out the&nbsp;<a href="http://imakewebthings.github.com/deck.js/docs">documentation</a>.</p>
 </section>
 
-<section class="slide" id="nested">
-	<h2>Nested Slides</h2>
-	<p>That last slide had a few steps.  To create substeps in slides, just nest them:</p>
-	<pre class="brush: html">&lt;section class=&quot;slide&quot;&gt;
-  &lt;h2&gt;Extensions&lt;/h2&gt;
-  &lt;p&gt;Core gives you basic slide functionality...&lt;/p&gt;
-  &lt;ul&gt;
-     &lt;li class=&quot;slide&quot;&gt;
-        &lt;h3&gt;deck.goto&lt;/h3&gt;
-        &lt;p&gt;Adds a shortcut key to jump to any slide number...&lt;/p&gt;
-     &lt;/li&gt;
-     &lt;li class=&quot;slide&quot;&gt;...&lt;/li&gt;
-     &lt;li class=&quot;slide&quot;&gt;...&lt;/li&gt;
-     &lt;li class=&quot;slide&quot;&gt;...&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/section&gt;</pre>
+<section class="slide">
+	<h2>Clustering - Redis est votre ami</h2>
+	<img src="images/websocket-cluster-redis.png" class="bgwhite">
 </section>
 
-<section class="slide" id="elements-images">
-	<h2>Other Elements: Images</h2>
-	<img src="http://placekitten.com/600/375" alt="Kitties">
-	<pre class="brush: html">&lt;img src=&quot;http://placekitten.com/600/375&quot; alt=&quot;Kitties&quot;&gt;</pre>
+<section class="slide">
+	<h2>Clustering - c'est facile</h2>
+	<h3>Configuration de Redis</h3>
+	<pre>/etc/redis/redis.conf</pre>
+	<ul>
+		<li>Cluster-ready !</li>
+	</ul>
 </section>
 
-<section class="slide" id="elements-blockquotes">
-	<h2>Other Elements: Blockquotes</h2>
-	<blockquote cite="http://example.org">
-		<p>Food is an important part of a balanced diet.</p>
-		<p><cite>Fran Lebowitz</cite></p>
-	</blockquote>
-	<pre class="brush: html">&lt;blockquote cite=&quot;http://example.org&quot;&gt;
-  &lt;p&gt;Food is an important part of a balanced diet.&lt;/p&gt;
-  &lt;p&gt;&lt;cite&gt;Fran Lebowitz&lt;/cite&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</pre>
+<section class="slide">
+	<h2>Clustering - c'est facile</h2>
+	<h3>Sessions Express/Connect</h3>
+	<pre class="brush:javascript">var RedisStore = require('connect-redis')(connect);
+connect.session({
+	"secret": 'my secret string',
+	"store":  new RedisStore(/* info */)
+})</pre>
 </section>
 
-<section class="slide" id="digging-deeper">
-	<h2>Digging Deeper</h2>
-	<p>If you want to learn about making your own themes, extending deck.js, and more, check out the&nbsp;<a href="../docs/">documentation</a>.</p>
+<section class="slide">
+	<h2>Clustering - c'est facile</h2>
+	<h3>Socket.IO</h3>
+<pre class="brush:javascript">var RedisStore = socketio.RedisStore;
+io.configure(function () {
+	io.set('store', new RedisStore({
+			// client déjà instancié
+			"redisClient": client,
+			/* info */
+		})
+	);
+});</pre>
+</section>
+
+<section class="slide">
+	<h2>Clustering - c'est facile</h2>
+	<h3>Multi-core avec "node cluster"</h3>
+	<ul>
+		<li>Les process partagent les sessions via Redis</li>
+		<li>Les process partagent les WebSockets via Redis</li>
+		<li>Ajouter les partages requis :)</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Clustering - c'est facile</h2>
+	<h3>Load-balancing avec un reverse-proxy</h3>
+</section>
+
+<section class="slide">
+	<h1>Merci !<br><br>Des questions ?</h1>
+	<img src="images/me_gusta.jpg" align="center" class="bgwhite">
+</section>
+
+<section class="slide">
+	<h2>Références</h2>
+	<ul>
+		<li><a href="http://nodejs.org">nodejs.org</a></li>
+		<li><a href="http://www8.org/w8-papers/5c-protocols/key/key.html">www8.org</a></li>
+		<li><a href="wiki.commonjs.org/wiki/Modules/1.1.1">CommonJS</a></li>
+		<li><a href="http://npmjs.org">NPM</a></li>
+		<li><a href="http://teddziuba.com/2011/10/node-js-is-cancer.html">Le troll pourri de Ted Dziuba</a></li>
+		<li><a href="http://learnboost.github.com/cluster/">learnboost's cluster</a></li>
+		<li><a href="http://redis.io">Redis</a></li>
+		<li><a href="#">HAProxy</a></li>
+		<li><a href="#">Varnish</a></li>
+	</ul>
 </section>
 
 <!-- Extensions -->
@@ -261,7 +600,7 @@ console.log("impossible de prédire l'ordre de réponse");</pre>
 
 <form action="." method="get" class="goto-form">
 	<label for="goto-slide">Go to slide:</label>
-	<input type="number" name="slidenum" id="goto-slide">
+	<input type="number" name="slidenum">
 	<input type="submit" value="Go">
 </form>
 
