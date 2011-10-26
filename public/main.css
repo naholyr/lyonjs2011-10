@@ -43,8 +43,7 @@
 .deck-container.on-slide-25 footer,
 .deck-container.on-slide-36 footer,
 .deck-container.on-slide-46 footer,
-.deck-container.on-slide-76 footer,
-.deck-container.on-slide-77 footer {
+.deck-container.on-slide-76 footer {
 	display: none;
 }
 .deck-container {

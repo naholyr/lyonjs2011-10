@@ -36,7 +36,7 @@
 <!-- Caché sur les titres -->
 
 <footer>
-	<strong class="agenda">N. Chambrier - LyonJS 25 Oct 2011</strong>
+	<strong class="agenda"><a href="http://naholyr.fr">N. Chambrier</a> - LyonJS 25 Oct 2011</strong>
 	<strong class="talk">Node.JS &amp; WebSockets</strong>
 	<p class="deck-status"><span class="deck-status-current"></span>/<span class="deck-status-total"></span></p>
 </footer>
@@ -305,9 +305,26 @@ socket.on('next', function () {
 	<ul>
 		<li><strong>Présentation contrôlée à distance</strong></li>
 	</ul>
-	<p>Vous pouvez suivre cette présentation en live</p>
-	<br><br>
-	<p align="center"><strong>sur <a href="http://naholyr.fr:1338">naholyr.fr:1338</a></strong></p>
+	<p>Vous auriez pu suivre cette présentation en live, mais ce n'est plus vraiment "live" là :)</p>
+	<p align="center"><strong>Par contre tout est sur github: <a href="https://github.com/naholyr/lyonjs2011-10">github.com/naholyr/lyonjs2011-10</a></strong></p>
+	<br>
+	<table border="0" style="margin:auto">
+		<tr>
+			<td width="450">
+				<strong>La télécommande</strong><br>
+				<a>http://server:1338/remote-control</a><br>
+				(Pwd: <code>coucougamin</code>)
+			</td>
+			<td><img width="300" src="images/remote-control.png" class="bgwhite"></td>
+		</tr>
+		<tr>
+			<td>
+				<strong>Les slides</strong><br>
+				<a>http://server:1338</a>
+			</td>
+			<td width="300">Les slides défilent en temps réel sur votre écran</td>
+		</tr>
+	</table>
 </section>
 
 <section class="slide">
@@ -476,7 +493,7 @@ Worker 6789 online</pre></div>
 	<ul>
 		<li class="slide">... est performant pour la transmission de messages ?</li>
 		<li class="slide">... est nativement "cluster-friendly" ?</li>
-		<li class="slide"><strong>MQueue</strong>, <strong>Redis</strong>, entre autres</li>
+		<li class="slide"><strong>ØMQ</strong>, <strong>AMQP</strong>, <strong>Redis</strong>...</li>
 	</ul>
 </section>
 
@@ -571,6 +588,16 @@ io.configure(function () {
 <section class="slide">
 	<h2>Clustering - c'est facile</h2>
 	<h3>Load-balancing avec un reverse-proxy</h3>
+	<ul>
+		<li>"cluster" fait du load-balancing entre les process d'une même machine</li>
+		<li>Utiliser tous les cœurs de sa machine c'est cool, mais plusieurs machines c'est mieux :)</li>
+	</ul>
+	<h3>Les solutions classiques qui aiment bien les WebSockets</h3>
+	<ul>
+		<li><strong>Varnish</strong> (profitez-en pour apprendre à gérer les headers de cache client, et les ESI c'est cool aussi)</li>
+		<li><strong>HAProxy</strong></li>
+	</ul>
+	<p><strong>Bonne pratique</strong>: utilisez toujours un reverse-proxy, même avec une seule machine derrière :)</p>
 </section>
 
 <section class="slide">
@@ -579,17 +606,45 @@ io.configure(function () {
 </section>
 
 <section class="slide">
+	<h2>Les questions / commentaires</h2>
+	<h3>Redis pub/sub ça marche pas en cluster !</h3>
+	<p>Ah oups. Par contre c'est en dév actif. La solution: comme on ne pourra pas faire de scaling horizontal sur ce "bus de message", avoir une instance de Redis dédié à cette tâche et <em>uniquement</em> cette tâche pour limiter sa charge.</p>
+</section>
+
+<section class="slide">
+	<h2>Les questions / commentaires</h2>
+	<h3>Est-il possible de "prioriser" les callbacks de plusieurs appels asynchrones "simultanés" ?</h3>
+	<p>Pas d'API native pour ça, néanmoins si le besoin se fait sentir le plus simple est sans doute de faire du séquentiel (tout en gardant les API asynchrones non bloquantes, grâce à des modules comme <code>async</code>). Sinon en jouant avec un callback unique et un flag global on doit pouvoir faire quelque chose.</p>
+</section>
+
+<section class="slide">
+	<h2>Les questions / commentaires</h2>
+	<h3>Le troll de Ted était pourri, mais qu'en est-il ressorti ?</h3>
+	<p>Son troll était vraiment velu, malpoli, mal amené, plein de dénigrement puant, bref horripilant. Néanmoins il a apporté de vrais débats, et a pointé du doigt un aspect très important et hélas négligé de Node par les débutants: son côté mono-thread. Néanmoins j'insiste sur le fait que ce n'est pas un <em>défaut</em> du langage mais un <em>choix de conception</em> (qui a l'avantage de terriblement simplifier la gestion des "race conditions" par exemple). Sans son troll, la question du clustering et du fork de process ne se serait pas posée aussi fort, et c'est donc positif.</p>
+</section>
+
+<section class="slide">
+	<h2>Les questions / commentaires</h2>
+	<h3>Quels cas d'utilisation pour Node ?</h3>
+	<p>En gros à chaque fois qu'on doit faire beaucoup de réseau ou de filesystem, il est meilleur que les langages "classiques" de part son API asynchrone (pendant que j'attends le résultat d'une requête SQL, je ne glande pas, je continue à répondre aux autres utilisateurs par exemple). De plus malgré une API haut niveau, on a accès à toutes les couches basses. Quelques use-case ont été cités: streaming, site web à forte concurrence d'accès, pseudo temps réel, et même une appli qui avait servi à contrôler du débit en sortie de routeurs (très bel exemple).</p>
+</section>
+
+<section class="slide">
 	<h2>Références</h2>
 	<ul>
-		<li><a href="http://nodejs.org">nodejs.org</a></li>
+		<li><a href="http://nodejs.org">nodejs.org</a> et son <a href="https://groups.google.com/forum/#!forum/nodejs">Google Group</a></li>
+		<li><a href="http://npmjs.org">NPM</a></li>
+		<li><a href="http://naholyr.fr">Mon blog \o/</a></li>
+		<li>Les dépôts git à suivre: <a href="https://github.com/joyent">joyent</a>, <a href="https://github.com/learnboost">learnboost</a>, <a href="https://github.com/visionmedia">visionmedia</a>, <a href="https://github.com/nodejitsu">nodejitsu</a></li>
 		<li><a href="http://www8.org/w8-papers/5c-protocols/key/key.html">www8.org</a></li>
 		<li><a href="wiki.commonjs.org/wiki/Modules/1.1.1">CommonJS</a></li>
-		<li><a href="http://npmjs.org">NPM</a></li>
 		<li><a href="http://teddziuba.com/2011/10/node-js-is-cancer.html">Le troll pourri de Ted Dziuba</a></li>
 		<li><a href="http://learnboost.github.com/cluster/">learnboost's cluster</a></li>
-		<li><a href="http://redis.io">Redis</a></li>
-		<li><a href="#">HAProxy</a></li>
-		<li><a href="#">Varnish</a></li>
+		<li><a href="http://www.rabbitmq.com/">Rabbit-MQ</a>, une implémentation d'<a href="http://www.amqp.org/">Advanced Message Queuing Protocol</li>
+		<li><a href="http://www.zeromq.org">ØMQ</a></li>
+		<li><a href="http://redis.io">Redis</a> et le <a href="http://redis.io/topics/pubsub">PUB/SUB</a></li>
+		<li><a href="http://haproxy.1wt.eu/">HAProxy</a>, <a href="http://www.royans.net/arch/haproxy-load-balancing/">Load Balancing</a>, et <a href="http://jfarcand.wordpress.com/2011/10/06/configuring-haproxy-for-websocket/">support des WebSockets</a></li>
+		<li><a href="https://www.varnish-cache.org/">Varnish</a>, <a href="https://www.varnish-cache.org/trac/wiki/LoadBalancing">Load Balancing</a>, <a href="http://naholyr.fr/2011/03/varnish-edge-side-includes-cache-partiel/">ESI</a>, et <a href="https://www.varnish-software.com/blog/browsers-html5-websocket-varnish-cook-thief-his-wife-her-lover">son support des WebSockets</a></li>
 	</ul>
 </section>
 
