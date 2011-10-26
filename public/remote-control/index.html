@@ -49,9 +49,13 @@
 		<input type="submit" value="auth" id="auth" class="not-auth">
 	</form>
 
-<script src="deckjs/jquery-1.6.4.min.js"></script>
-<script type="text/javascript" src="socket.io/socket.io.js"></script>
+<script src="/deckjs/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">jQuery(function($) {
+	if (typeof io == 'undefined') {
+		alert('Socket.IO indisponible, pas grand chose à faire sur cette page...');
+		return;
+	}
 	(function (socket) {
 		var ok = false;
 		var currSlide = 0;
