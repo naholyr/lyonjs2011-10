@@ -1,9 +1,9 @@
 {
-    "name": "application-name"
+    "name": "Remote Controlled Slides"
   , "version": "0.0.1"
   , "private": true
   , "dependencies": {
-      "express": "2.4.7"
-    , "jade": ">= 0.0.1"
+      "connect": "1.7.x",
+    , "socket.io": "0.8.x"
   }
 }
