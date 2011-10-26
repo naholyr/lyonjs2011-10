@@ -35,7 +35,7 @@
 	</style>
 </head>
 <body>
-	<div class="auth">
+	<div class="auth" style="display:none">
 		<input type="button" value="&lt;&lt;" id="prev">
 		<input type="button" value="&gt;&gt;" id="next">
 		<input type="text" value="go" id="command">
@@ -83,6 +83,12 @@
 			ok = false;
 			updateControls();
 		});
+		socket.on('deck', function () {
+			if (arguments[0] == 'go') {
+				$('#command').val('go');
+				$('#arg').val(currSlide = arguments[1]);
+			}
+		});
 		$('#next').bind('click', function (e) {
 			$('#arg').val(++currSlide);
 			$('#command').val('go');
@@ -97,7 +103,7 @@
 			e.preventDefault();
 			var cmd = $('#command').val(), arg = null;
 			switch (cmd) {
-				case 'go': arg = currSlide = parseInt($('#arg').val()); $('#arg').val(arg+1); break;
+				case 'go': arg = currSlide = parseInt($('#arg').val()); break;
 			}
 			if (arg != null) {
 				socket.emit('deck', cmd, arg);
