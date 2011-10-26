@@ -1,2 +1,3 @@
 app.pid
 nohup.out
+node_modules/*
