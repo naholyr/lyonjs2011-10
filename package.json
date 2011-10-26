@@ -1,9 +1,9 @@
 {
-    "name": "Remote Controlled Slides"
+    "name": "remote-controlled-slides"
   , "version": "0.0.1"
   , "private": true
   , "dependencies": {
-      "connect": "1.7.x",
+      "connect": "1.7.x"
     , "socket.io": "0.8.x"
   }
 }
